@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-brand-cream: #FAF8F0;
+  --color-brand-yellow: #FFDA22;
+  --color-brand-pink: #F5689E;
+
+  /* Typography */
+  --font-heading: "Raleway", sans-serif;
+  --font-sans: "Chivo", sans-serif;
+
+  /* Box Shadows */
+  --shadow-solid: 10px 10px 0px 0px rgba(0,0,0,1);
+  --shadow-solid-lg: 20px 20px 0px 0px rgba(0,0,0,1);
+}
