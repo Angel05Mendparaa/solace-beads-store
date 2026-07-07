@@ -5,6 +5,7 @@ import InfiniteMarquee from './components/InfiniteMarquee/InfiniteMarquee.jsx'
 import FeaturedCollections from './components/FeaturedCollections/FeaturedCollections.jsx'
 import AboutSection from './components/AboutSection/AboutSection.jsx'
 import CTASection from './components/CTASection/CTASection.jsx'
+import Footer from './components/Footer/Footer.jsx'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <FeaturedCollections />
       <AboutSection />
       <CTASection />
+      <Footer />
     </div>
   )
 }
