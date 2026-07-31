@@ -61,13 +61,16 @@ const AboutSection = () => {
           </p>
           
           {/* Action Button */}
-          <a 
-            href="/our-story" 
-            className="group mt-1 md:mt-4 bg-[#FFDA22] hover:bg-[#f9f8f3] text-black font-black uppercase tracking-widest text-[6px] sm:text-[8px] md:text-sm py-1.5 px-2.5 sm:py-2 sm:px-4 md:py-4 md:px-8 rounded-full flex items-center gap-1 md:gap-3 border md:border-2 border-black transition-colors duration-300"
-          >
-            Our Story
-            <ArrowRight className="w-2 h-2 sm:w-3 sm:h-3 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
-          </a>
+          <Link
+          to="/our-story"
+          className="group mt-1 md:mt-4 bg-[#FFDA22] hover:bg-[#f9f8f3] text-black font-black uppercase tracking-widest text-[6px] sm:text-[8px] md:text-sm py-1.5 px-2.5 sm:py-2 sm:px-4 md:py-4 md:px-8 rounded-full flex items-center gap-1 md:gap-3 border md:border-2 border-black transition-colors duration-300"
+        >
+          Our Story
+          <ArrowRight
+            className="w-2 h-2 sm:w-3 sm:h-3 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform"
+            strokeWidth={3}
+          />
+        </Link>
           
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 // The custom bead divider component using the brand colors
@@ -70,9 +71,22 @@ const Footer = () => {
                 Shop
               </h4>
               <ul className="flex flex-col gap-8 font-black text-sm md:text-lg text-black/80 uppercase italic">
-                <li><a href="/collections" className="hover:text-[#f26c9d] hover:translate-x-1 inline-block transition-all">Collections</a></li>
-                <li><a href="/custom-orders" className="hover:text-[#f26c9d] hover:translate-x-1 inline-block transition-all">Custom Orders</a></li>
-                <li><a href="/faqs" className="hover:text-[#f26c9d] hover:translate-x-1 inline-block transition-all">FAQs</a></li>
+                <li>
+                  <Link to="/collections" className="hover:text-[#F5689E] hover:translate-x-1 inline-block transition-all">
+                    Collections
+                  </Link>
+                </li>
+                <li>
+                  {/* 2. Update the Custom Orders link! */}
+                  <Link to="/custom-orders" className="hover:text-[#F5689E] hover:translate-x-1 inline-block transition-all">
+                    Custom Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/faqs" className="hover:text-[#F5689E] hover:translate-x-1 inline-block transition-all">
+                    FAQs
+                  </Link>
+                </li>
               </ul>
             </motion.div>
 
@@ -83,7 +97,7 @@ const Footer = () => {
               </h4>
               <ul className="flex flex-col gap-8 font-black text-sm md:text-lg text-black/80 uppercase italic">
                 <li><a href="/our-story" className="hover:text-[#f26c9d] hover:translate-x-1 inline-block transition-all">Our Story</a></li>
-                <li><a href="/contact" className="hover:text-[#f26c9d] hover:translate-x-1 inline-block transition-all">Contact</a></li>
+                <li><Link to="/contact" className="hover:text-[#f26c9d] hover:translate-x-1 inline-block transition-all">Contact</Link></li>
               </ul>
             </motion.div>
             
