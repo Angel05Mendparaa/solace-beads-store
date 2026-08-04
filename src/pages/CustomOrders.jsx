@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import CustomHero from '../components/CustomOrders/CustomHero';
 import CustomOrderForm from '../components/CustomOrders/CustomOrderForm';
 import SuccessModal from '../components/CustomOrders/SuccessModal';
+import Navbar from '@/components/Navbar/Navbar';
+import BackButton from '@/components/common/BackButton';
+import Footer from '@/components/Footer/Footer';
 
 const CustomOrders = () => {
   const [showSuccess, setShowSuccess] = useState(false);
@@ -14,22 +17,27 @@ const CustomOrders = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#FAF8F0] font-sans pb-24 relative overflow-hidden">
-      {/* Decorative background shapes for playful vibe */}
-      <div className="absolute top-20 -left-20 w-60 h-60 rounded-full bg-[#FFDA22] opacity-20 blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-40 -right-20 w-80 h-80 rounded-full bg-[#F5689E] opacity-15 blur-3xl pointer-events-none"></div>
+    <div>
+      <main className="min-h-screen bg-[#FAF8F0] font-sans pb-24 relative overflow-hidden">
+        {/* Decorative background shapes for playful vibe */}
+        <div className="absolute top-20 -left-20 w-60 h-60 rounded-full bg-[#FFDA22] opacity-20 blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-40 -right-20 w-80 h-80 rounded-full bg-[#F5689E] opacity-15 blur-3xl pointer-events-none"></div>
+        <Navbar />
+        <BackButton />
+        <CustomHero />
+        
+        <div className="max-w-3xl mx-auto px-4 md:px-6 z-10 relative">
+          <CustomOrderForm onSubmitSuccess={handleFormSubmit} />
+        </div>
 
-      <CustomHero />
-      
-      <div className="max-w-6xl mx-auto px-4 md:px-6 z-10 relative">
-        <CustomOrderForm onSubmitSuccess={handleFormSubmit} />
-      </div>
-
-      <SuccessModal 
-        isOpen={showSuccess} 
-        onClose={() => setShowSuccess(false)} 
-      />
-    </main>
+        <SuccessModal 
+          isOpen={showSuccess} 
+          onClose={() => setShowSuccess(false)} 
+        />
+      </main>
+      <Footer />
+    </div>
+    
   );
 };
 

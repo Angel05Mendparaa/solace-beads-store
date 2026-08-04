@@ -5,7 +5,7 @@ import App from './App.jsx'
 
 // THIS IS THE CRITICAL LINE! 
 // Without this, Tailwind will not load.
-import './index.css' 
+import './styles/index.css' 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -32,6 +32,10 @@ export const CartProvider = ({ children }) => {
     // openCart(); 
   };
 
+  const removeFromCart = (id) => {
+    setCartItems((prevItems) => prevItems.filter(item => item.id !== id));
+  };
+
   return (
     <CartContext.Provider value={{ 
       isCartOpen, 
@@ -39,6 +43,7 @@ export const CartProvider = ({ children }) => {
       closeCart, 
       cartItems, 
       addToCart,
+      removeFromCart,
       cartCount 
     }}>
       {children}

@@ -3,15 +3,27 @@ import ColorSelector from './ColorSelector';
 import UploadBox from './UploadBox';
 
 const productOptions = [
-  { id: 'bracelet', name: 'Bracelet', icon: '✨' },
-  { id: 'phone_charm', name: 'Phone Charm', icon: '📱' },
-  { id: 'keychain', name: 'Keychain', icon: '🔑' },
-  { id: 'necklace', name: 'Necklace', icon: '📿' },
-  { id: 'other', name: 'Something Else', icon: '🌈' },
+  { id: 'bracelet', name: 'Bracelet', icon: '𓋜' },
+  { id: 'phone_charm', name: 'Phone Charm', icon: '✮⋆˙' },
+  { id: 'keychain', name: 'Keychain', icon: '🏷' },
+  { id: 'necklace', name: 'Pins', icon: '🖈' },
+  { id: 'other', name: 'Something Else', icon: '𓆏' },
 ];
 
-const budgetOptions = ['Under $20', '$20–35', '$35–50', 'No Preference'];
+const budgetOptions = ['Under ₹100', '₹100–250', '₹250–500  ', 'No Preference'];
 const occasionOptions = ['Birthday', 'Gift', 'Friendship', 'Anniversary', 'Just Because', 'Other'];
+
+const SectionLabel = ({ children }) => (
+  <h2 className="font-bold uppercase tracking-widest text-sm mb-4 text-black/80">
+    {children}
+  </h2>
+);
+
+const FieldLabel = ({ children }) => (
+  <label className="block font-semibold uppercase tracking-widest text-xs mb-2 text-black/60">
+    {children}
+  </label>
+);
 
 const CustomOrderForm = ({ onSubmitSuccess }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -23,7 +35,6 @@ const CustomOrderForm = ({ onSubmitSuccess }) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     
-    // Combine state data with form data
     const finalData = {
       ...data,
       productType: selectedProduct,
@@ -34,46 +45,43 @@ const CustomOrderForm = ({ onSubmitSuccess }) => {
     onSubmitSuccess(finalData);
   };
 
-  // Reusable component for form section labels
-  const FormLabel = ({ children, step }) => (
-    <div className="flex items-center gap-4 mb-6">
-      <span className="flex-shrink-0 w-10 h-10 rounded-full bg-white border-[3px] border-black flex items-center justify-center font-black text-xl shadow-[3px_3px_0px_#000]">
-        {step}
-      </span>
-      <h2 className="font-black text-2xl md:text-3xl uppercase tracking-tighter text-black drop-shadow-[2px_2px_0px_#FFDA22]">
-        {children}
-      </h2>
-    </div>
-  );
-
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-12 bg-white border-[6px] md:border-[8px] border-black p-8 md:p-12 shadow-[12px_12px_0px_0px_#000]">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-8 md:gap-10 bg-white border-[3px] md:border-[4px] border-black rounded-3xl p-5 sm:p-8 md:p-10">
       
       {/* 1. Customer Info */}
       <section>
-        <FormLabel step="1">Who are you?</FormLabel>
-        <div className="grid md:grid-cols-2 gap-6">
-          <input type="text" name="fullName" placeholder="FULL NAME" required className="solace-input" />
-          <input type="email" name="email" placeholder="EMAIL ADDRESS" required className="solace-input" />
-          <input type="tel" name="phone" placeholder="PHONE NUMBER (OPTIONAL)" className="solace-input md:col-span-2" />
+        <SectionLabel>Who are you?</SectionLabel>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div>
+            <FieldLabel>Your Name</FieldLabel>
+            <input type="text" name="fullName" placeholder="What do we call you?" required className="solace-input w-full" />
+          </div>
+          <div>
+            <FieldLabel>Email Address</FieldLabel>
+            <input type="email" name="email" placeholder="Where do we reply?" required className="solace-input w-full" />
+          </div>
+          <div className="sm:col-span-2">
+            <FieldLabel>Phone Number (Optional)</FieldLabel>
+            <input type="tel" name="phone" placeholder="Best number to reach you" className="solace-input w-full" />
+          </div>
         </div>
       </section>
 
       {/* 2. Choose Product - CARDS */}
       <section>
-        <FormLabel step="2">What are we making?</FormLabel>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+        <SectionLabel>What are we making?</SectionLabel>
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-1.5 sm:gap-2 md:gap-3">
           {productOptions.map((option) => (
             <button
               key={option.id}
               type="button"
               onClick={() => setSelectedProduct(option.id)}
-              className={`group flex flex-col items-center justify-center text-center p-6 bg-[#FAF8F0] border-[4px] border-black shadow-[6px_6px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-x-1 hover:translate-y-1 transition-all aspect-square ${
-                selectedProduct === option.id ? 'bg-[#FFDA22] shadow-[2px_2px_0px_#000] translate-x-1 translate-y-1' : ''
+              className={`group flex flex-col items-center justify-center text-center p-1.5 sm:p-2 bg-[#FAF8F0] border-[2px] border-black rounded-lg transition-all duration-300 hover:translate-y-0.5 aspect-square ${
+                selectedProduct === option.id ? 'bg-[#FFDA22]' : ''
               }`}
             >
-              <span className="text-5xl mb-4 group-hover:scale-110 transition-transform">{option.icon}</span>
-              <span className="font-black uppercase text-sm md:text-base text-black tracking-tight leading-tight">
+              <span className="text-base sm:text-lg md:text-xl mb-0.5 sm:mb-1 group-hover:scale-110 transition-transform">{option.icon}</span>
+              <span className="font-semibold uppercase text-[7px] sm:text-[8px] md:text-[10px] tracking-widest text-black leading-tight">
                 {option.name}
               </span>
             </button>
@@ -82,36 +90,37 @@ const CustomOrderForm = ({ onSubmitSuccess }) => {
       </section>
 
       {/* 3. Idea & Colors */}
-      <section className="grid md:grid-cols-3 gap-10">
+      <section className="grid md:grid-cols-3 gap-6 md:gap-8">
         <div className="md:col-span-2">
-          <FormLabel step="3">Describe Your Idea</FormLabel>
+          <SectionLabel>Describe Your Idea</SectionLabel>
+          <FieldLabel>Your Message</FieldLabel>
           <textarea 
             name="ideaDescription" 
             placeholder="Tell me about your dream accessory... what vibes, patterns, or specific beads do you imagine?" 
             required 
-            rows="6" 
-            className="solace-input resize-none"
+            rows="5" 
+            className="solace-input w-full resize-none"
           />
         </div>
         <div>
-          <h3 className="font-black text-xl uppercase text-black mb-4 drop-shadow-[1px_1px_0px_#fff]">Pick a Vibe Palette</h3>
+          <SectionLabel>Pick a Vibe Palette</SectionLabel>
           <ColorSelector selected={selectedColor} onSelect={setSelectedColor} />
         </div>
       </section>
 
       {/* 4. Inspiration */}
       <section>
-        <FormLabel step="4">Inspiration Station</FormLabel>
+        <SectionLabel>Inspiration Station</SectionLabel>
         <UploadBox files={files} setFiles={setFiles} />
       </section>
 
       {/* 5. Logistics (Budget/Occasion) */}
-      <section className="grid md:grid-cols-2 gap-10">
+      <section className="grid md:grid-cols-2 gap-6 md:gap-8">
         <div>
-          <h3 className="solace-sub-header">Budget Preference (Optional)</h3>
-          <div className="flex flex-wrap gap-3">
+          <FieldLabel>Budget Preference (Optional)</FieldLabel>
+          <div className="flex flex-wrap gap-2">
             {budgetOptions.map(opt => (
-              <label key={opt} className="solace-pill-label">
+              <label key={opt} className="solace-pill-label cursor-pointer rounded-full">
                 <input type="radio" name="budget" value={opt} className="sr-only solace-pill-radio" />
                 <span>{opt}</span>
               </label>
@@ -119,10 +128,10 @@ const CustomOrderForm = ({ onSubmitSuccess }) => {
           </div>
         </div>
         <div>
-          <h3 className="solace-sub-header">What's the Occasion?</h3>
-          <div className="flex flex-wrap gap-3">
+          <FieldLabel>What's the Occasion?</FieldLabel>
+          <div className="flex flex-wrap gap-2">
             {occasionOptions.map(opt => (
-              <label key={opt} className="solace-pill-label">
+              <label key={opt} className="solace-pill-label cursor-pointer rounded-full">
                 <input type="radio" name="occasion" value={opt} className="sr-only solace-pill-radio" />
                 <span>{opt}</span>
               </label>
@@ -132,12 +141,12 @@ const CustomOrderForm = ({ onSubmitSuccess }) => {
       </section>
 
       {/* Submit Button */}
-      <div className="border-t-[4px] border-black pt-12 mt-4 flex justify-center">
+      <div className="border-t-[2px] border-black pt-8 mt-2 flex justify-center">
         <button 
           type="submit" 
-          className="relative inline-flex items-center gap-3 bg-[#FFDA22] hover:bg-[#F5689E] text-black border-[4px] border-black px-12 py-5 font-black uppercase text-xl md:text-2xl shadow-[8px_8px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-x-1 hover:translate-y-1 transition-all group"
+          className="relative inline-flex items-center gap-2 bg-[#FFDA22] hover:bg-[#F5689E] text-black border-[3px] border-black rounded-full px-8 py-3.5 font-bold uppercase tracking-wider text-sm transition-all duration-300 hover:translate-y-0.5 group"
         >
-          <span>✨ Start My Custom Order</span>
+          <span>Send My Request</span>
         </button>
       </div>
     </form>

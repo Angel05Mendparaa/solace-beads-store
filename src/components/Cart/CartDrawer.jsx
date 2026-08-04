@@ -5,7 +5,7 @@ import CartItem from './CartItem';
 import CartFooter from './CartFooter';
 import EmptyCart from './EmptyCart';
 
-const CartDrawer = ({ isOpen, onClose, cartItems = [] }) => {
+const CartDrawer = ({ isOpen, onClose, cartItems = [], onRemoveItem }) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -19,13 +19,13 @@ const CartDrawer = ({ isOpen, onClose, cartItems = [] }) => {
             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 cursor-pointer"
           />
 
-          {/* Sliding Drawer - Notice the rounded-l-[2rem] for that playful panel look */}
+          {/* Sliding Drawer */}
           <motion.div 
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: "spring", stiffness: 80, damping: 20 }}
-            className="fixed top-0 right-0 h-full w-full sm:w-[400px] md:w-[450px] bg-[#FAF8F0] border-l-[6px] border-black rounded-l-[2rem] shadow-[-12px_0px_0px_0px_rgba(0,0,0,0.1)] z-50 flex flex-col overflow-hidden"
+            className="fixed top-0 right-0 h-full w-full sm:w-[400px] md:w-[450px] bg-[#FAF8F0] border-l-[6px] border-black rounded-l-[2rem] z-50 flex flex-col overflow-hidden"
           >
             <CartHeader onClose={onClose} />
             
@@ -33,7 +33,7 @@ const CartDrawer = ({ isOpen, onClose, cartItems = [] }) => {
               {cartItems.length > 0 ? (
                 <div className="flex flex-col gap-6">
                   {cartItems.map((item, index) => (
-                    <CartItem key={index} item={item} />
+                    <CartItem key={item.id ?? index} item={item} onRemove={onRemoveItem} />
                   ))}
                 </div>
               ) : (

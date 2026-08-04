@@ -1,0 +1,84 @@
+/* 1. Fonts MUST be the absolute first lines in the file */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
+
+/* 2. Then Tailwind */
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-brand-cream: #FAF8F0;
+  --color-brand-yellow: #FFDA22;
+  --color-brand-pink: #F5689E;
+
+  /* Typography */
+  --font-heading: "Montserrat", sans-serif;
+  --font-sans: "Montserrat", sans-serif;
+
+  /* Box Shadows */
+  --shadow-solid: 10px 10px 0px 0px rgba(0,0,0,1);
+  --shadow-solid-lg: 20px 20px 0px 0px rgba(0,0,0,1);
+}
+
+/* Converted to standard CSS to bypass the v4 @apply bug */
+@layer components {
+  .solace-input {
+    width: 100%;
+    background-color: #ffffff;
+    border: 3px solid #000000;
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #000000;
+    outline: none;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .solace-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .solace-input:focus {
+    background-color: var(--color-brand-cream);
+    box-shadow: inset 4px 4px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .solace-sub-header {
+    font-weight: 900;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 1rem;
+    filter: drop-shadow(1px 1px 0px #ffffff);
+  }
+
+  .solace-pill-label {
+    cursor: pointer;
+  }
+  
+  .solace-pill-label span {
+    display: inline-block;
+    background-color: #ffffff;
+    border: 3px solid #000000;
+    padding: 0.5rem 1.25rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    box-shadow: 3px 3px 0px #000000;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .solace-pill-label:hover span {
+    background-color: var(--color-brand-cream);
+    box-shadow: 1px 1px 0px #000000;
+    transform: translate(2px, 2px);
+  }
+  
+  .solace-pill-radio:checked + span {
+    background-color: var(--color-brand-pink);
+    color: #000000;
+    box-shadow: 1px 1px 0px #000000;
+    transform: translate(2px, 2px);
+  }
+}

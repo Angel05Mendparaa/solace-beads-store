@@ -1,63 +1,83 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Check } from 'lucide-react';
-import { useCart } from '../../context/CartContext'; // Import the hook
+import { useCart } from '@/context/CartContext';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, disableQuickAdd = false, navigateTo, disabledLabel = 'Unavailable' }) => {
   const [isAdding, setIsAdding] = useState(false);
-  
+  const navigate = useNavigate();
+
   // Grab the global addToCart and openCart functions
   const { addToCart, openCart } = useCart();
 
-  const handleQuickAdd = () => {
+  const handleQuickAdd = (e) => {
+    e.stopPropagation(); // don't trigger the card's own navigation click
     setIsAdding(true);
-    
+
     // Add to global state immediately (updates the navbar badge instantly!)
     addToCart(product);
 
-    // Wait 1 second to show the success state on the button, then open the drawer
     setTimeout(() => {
       setIsAdding(false);
       openCart();
     }, 1000);
   };
 
+  const handleCardClick = () => {
+    if (navigateTo) navigate(navigateTo);
+  };
+
   return (
-    <div className="group relative bg-white border-[4px] border-black p-4 flex flex-col items-center shadow-[8px_8px_0px_0px_#000] hover:shadow-[4px_4px_0px_0px_#000] hover:translate-y-1 hover:translate-x-1 transition-all cursor-pointer">
-      {/* (Rest of your ProductCard design code remains exactly the same as before!) */}
-      
-      <div className="w-full aspect-square bg-[#FAF8F0] border-[3px] border-black mb-4 overflow-hidden relative">
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300" 
+    <div
+      onClick={handleCardClick}
+      className="group relative bg-white border-[1.5px] sm:border-[2px] border-black p-2.5 sm:p-4 flex flex-col items-center transition-all duration-300 cursor-pointer hover:-translate-y-1"
+      style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.06), 0 8px 20px rgba(0,0,0,0.08)' }}
+    >
+
+      {/* Product Image — always 1:1 */}
+      <div className="w-full aspect-square bg-[#FAF8F0] border-[1.5px] border-black/80 mb-2.5 sm:mb-4 overflow-hidden relative">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
-        <div className="absolute -top-3 -right-4 w-12 h-6 bg-black/10 rotate-45 mix-blend-multiply z-10"></div>
       </div>
-      
-      <h3 className="font-black uppercase text-lg text-center w-full truncate text-black">
+
+      <h3 className="font-black uppercase text-sm sm:text-lg text-center w-full truncate text-black">
         {product.name}
       </h3>
-      <p className="font-black text-[#F5689E] text-xl mt-1 drop-shadow-[1px_1px_0px_#000]">
+      <p className="font-bold text-[#F5689E] text-base sm:text-xl mt-0.5 sm:mt-1">
         {product.price}
       </p>
-      
+
       {/* The Animated Button */}
-      <button 
-        onClick={handleQuickAdd}
-        disabled={isAdding}
-        className={`mt-4 w-full border-[3px] border-black py-2 font-black uppercase text-sm transition-all shadow-[4px_4px_0px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_#000] flex justify-center items-center gap-2 ${
-          isAdding ? 'bg-[#F5689E] text-white pointer-events-none' : 'bg-[#FFDA22] text-black hover:bg-[#F5689E]'
-        }`}
-      >
-        {isAdding ? (
-          <>
-            <Check strokeWidth={4} className="w-5 h-5" /> Added!
-          </>
-        ) : (
-          'Quick Add'
-        )}
-      </button>
-      
+      {disableQuickAdd ? (
+        <button
+          disabled
+          className="mt-2.5 sm:mt-4 w-full rounded-full border-[1.5px] border-black/30 py-1.5 sm:py-2 font-black uppercase text-xs sm:text-sm tracking-wide bg-black/10 text-black/40 cursor-not-allowed flex justify-center items-center gap-1.5 sm:gap-2"
+        >
+          {disabledLabel}
+        </button>
+      ) : (
+        <button
+          onClick={handleQuickAdd}
+          disabled={isAdding}
+          className={`mt-2.5 sm:mt-4 w-full rounded-full border-[1.5px] border-black py-1.5 sm:py-2 font-black uppercase text-xs sm:text-sm tracking-wide transition-all duration-300 flex justify-center items-center gap-1.5 sm:gap-2 ${
+            isAdding
+              ? 'bg-[#F5689E] text-white pointer-events-none'
+              : 'bg-[#FFDA22] text-black hover:bg-[#F5689E] hover:text-white'
+          }`}
+        >
+          {isAdding ? (
+            <>
+              <Check strokeWidth={3} className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Added!
+            </>
+          ) : (
+            'Quick Add'
+          )}
+        </button>
+      )}
+
     </div>
   );
 };

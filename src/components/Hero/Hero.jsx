@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'; 
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'; 
 import { ArrowLeft, Pause, Play, ArrowRight } from 'lucide-react';
-import spidy from "../../assets/images/spidy.jpg";
-import spidy_bracelet from "../../assets/images/spidy_bracelet.jpg";
-import heart from "../../assets/images/heart.jpg";
+import PIN4 from "../../assets/images/PIN4.png";
+import KC4 from "../../assets/images/KC4.png";
+import B1 from "../../assets/images/B1.png";
 import circleImage from "../../assets/images/circle.jpg";
 
-const carouselImages = [spidy, spidy_bracelet, heart];
+const carouselImages = [PIN4, KC4, B1];
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,8 +17,6 @@ const Hero = () => {
   // Parallax Circle Transform
   const circleY = useTransform(scrollY, [0, 400], [0, -300]);
   
-  // NEW: Navbar Background Color Transform
-  // As the user scrolls between 150px and 300px down, the color morphs from cream to black
   const navBg = useTransform(scrollY, [150, 300], ["#f9f8f3", "#000000"]);
 
   const handleNext = () => {
@@ -51,7 +49,7 @@ const Hero = () => {
     <div className="relative w-full font-sans overflow-x-hidden">
 
       {/* Top Banner */}
-      <section className="relative w-full bg-[#f9f8f3] py-6 md:py-8 lg:py-12 flex items-center justify-center z-20">
+      <section className="relative w-full bg-[#FAF8F0] py-10 md:py-14 lg:py-20 flex items-center justify-center z-20">
         
         {/* WRAPPER DIV for Position */}
         <div className="absolute left-0 bottom-0 -translate-x-3% translate-y-1/2 z-30">
@@ -73,8 +71,9 @@ const Hero = () => {
         
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full flex justify-center text-center pl-20 sm:pl-6 md:pl-4">
-            <h2 className="text-xl sm:text-3xl md:text-5xl lg:text-7xl font-black tracking-tight text-black uppercase leading-none whitespace-nowrap">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full  flex justify-center text-center pl-20 sm:pl-6 md:pl-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl  tracking-tight text-black leading-none whitespace-nowrap"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}>
               SO-SO-SO-SOLACE
             </h2>
         </div>
@@ -110,7 +109,7 @@ const Hero = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-white font-black text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] leading-[0.85] tracking-tighter uppercase mb-4 md:mb-6 drop-shadow-lg">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-black lg:text-[7rem] leading-[0.85] tracking-tighter uppercase mb-4 md:mb-6 drop-shadow-lg">
                 MADE TO <br /> BE YOURS
               </h2>
             
@@ -148,10 +147,10 @@ const Hero = () => {
                   src={carouselImages[currentIndex]} 
                   alt={`Featured Solace Accessory ${currentIndex + 1}`} 
                   className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl z-20"
-                  initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                  initial={{ opacity: 0, x: 30, scale: 0.95 }}
                   animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: -50, scale: 0.9 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  exit={{ opacity: 0, x: -30, scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
                 />
               </AnimatePresence>
             </div>
